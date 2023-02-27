@@ -55,5 +55,3 @@ module "vpc" {
     "team3/role/internal-elb"             = "1"
   }
 }
-
- 
