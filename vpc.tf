@@ -14,7 +14,7 @@ data "aws_availability_zones" "available" {}
 
 
 locals {
-  cluster_name = "test-eks-cluster-${random_string.suffix.result}"
+  cluster_name = "team3-eks-cluster-${random_string.suffix.result}"
 }
 
 
@@ -40,19 +40,19 @@ module "vpc" {
 
 
   tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+    "team3/cluster/${local.cluster_name}" = "shared"
   }
 
 
   public_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/elb"                      = "1"
+    "team3/cluster/${local.cluster_name}" = "shared"
+    "team3/role/elb"                      = "1"
   }
 
 
   private_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/internal-elb"             = "1"
+    "team3/cluster/${local.cluster_name}" = "shared"
+    "team3/role/internal-elb"             = "1"
   }
 }
 
