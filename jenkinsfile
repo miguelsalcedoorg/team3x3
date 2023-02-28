@@ -9,6 +9,14 @@ tools {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
             }
         }
+        stage ('Terraform version') { 
+            steps {
+                sh '''
+                     terraform --version
+                     ''' 
+                 }
+             }
+    
         stage ('Terraform init') { 
             steps {
                  sh '''
