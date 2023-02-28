@@ -1,35 +1,3 @@
-// pipeline {
-//     agent any
-
-//     stages {
-//         stage('Checkout') {
-//             steps {
-//                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
-//             }
-//         }
-
-//     stage ('terraform') {
-//         steps {
-//             sh ('./terraform apply -auto-approve')
-//             }
-//         }
-//      }
-//  }
-
-// stage ("terraform init") {
-
-
-//     steps {
-
-
-//         sh ('terraform init')
-
-
-//         }
-
-
-// }
-
 pipeline {
 agent any
 tools {
