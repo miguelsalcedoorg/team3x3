@@ -14,15 +14,15 @@ pipeline {
 
 }
 
-stage (“terraform init”) {
+// stage (“terraform apply) {
 
-    steps {
+//     steps {
 
-        sh (‘terraform init’)
+//         sh (‘terraform init’)
 
-        }
+//         }
 
-}
+// }
 
     stage (“terraform Action”) {
 
