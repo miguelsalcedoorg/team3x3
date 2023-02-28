@@ -33,7 +33,7 @@
 pipeline {
 agent any
 tools {
-  terraform 'terraform'
+  terraform 'Terraform'
 }
 options { ansiColor('xterm') } 
  stages { 
