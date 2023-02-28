@@ -20,7 +20,6 @@ tools {
         stage ('Terraform init') { 
             steps {
                  sh '''
-                    cd terraform-test/
                     terraform init
                     ''' 
                  }
@@ -28,7 +27,6 @@ tools {
         stage ('Terraform apply') { 
             steps {
                 sh '''
-                    cd terraform-test/
                     terraform apply --auto-approve
                     ''' 
                     }
