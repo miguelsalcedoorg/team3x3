@@ -11,10 +11,10 @@ wget -N -c https://raw.githubusercontent.com/warrensbox/terraform-switcher/relea
 chmod 777 script.sh
 
 # Install tfswitch in a location you have permission
-./script.sh -b $(pwd)/.bin
+./install.sh -b $(pwd)/usr/local/bin
 
 # set custom bin path
-CUSTOMBIN=$(pwd)/.bin
+CUSTOMBIN=$(pwd)/usr/local/bin
 
 #Add custom bin path to PATH environment
 export PATH=$CUSTOMBIN:$PATH
