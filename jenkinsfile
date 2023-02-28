@@ -35,14 +35,12 @@ agent any
 tools {
   terraform 'Terraform'
 }
-options { ansiColor('xterm') } 
- stages { 
-   stage ('Checkout Repo') { 
-     steps { 
-       cleanWs()
-       sh  'git clone https://github.com/miguelsalcedoorg/team3x3.git'
-      }
-      } 
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
+            }
+        }
 
 stage ('Terraform version') { 
   steps {
