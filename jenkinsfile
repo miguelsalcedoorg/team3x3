@@ -1,26 +1,20 @@
-pipeline {
+// pipeline {
+//     agent any
 
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
+//             }
+//         }
 
-    agent any
-
-
-        stages {
-
-
-            stage('Checkout') {
-
-
-    steps {
-
-
-        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
-
-
-            }
-
-
-}
-
+//     stage ('terraform') {
+//         steps {
+//             sh ('./terraform apply -auto-approve')
+//             }
+//         }
+//      }
+//  }
 
 // stage ("terraform init") {
 
@@ -36,24 +30,59 @@ pipeline {
 
 // }
 
-
-    stage ('terraform') {
-
-
-steps {
-
-
-sh ('./terraform apply -auto-approve')
-
-
+pipeline {
+agent any
+tools {
+  terraform 'terraform'
 }
+options { ansiColor('xterm') } 
+ stages { 
+   stage ('Checkout Repo') { 
+     steps { 
+       cleanWs()
+       sh  'git clone https://github.com/miguelsalcedoorg/team3x3.git'
+      }
+      } 
 
-
+stage ('Terraform version') { 
+  steps {
+   sh '''
+    terraform --version
+   ''' 
+    }
+    }
+    
+  stage ('Terraform init') { 
+  steps {
+   sh '''
+   cd terraform-test/
+   terraform init
+   ''' 
+   }
+   }
+   
+  stage ('Terraform plan') { 
+  steps {
+   sh '''
+   cd terraform-test/
+   terraform plan -out=tfplan.out
+   terraform show -json tfplan.out
+   ''' 
+   }
+   }
+   
+ stage ('Terraform apply') { 
+  steps {
+   sh '''
+   cd terraform-test/
+   terraform apply --auto-approve
+   ''' 
+   }
+        post { 
+        always { 
+            cleanWs()
+         }
+        }
+       }
+  }
 }
-
-
-}
-
-
-}
-
