@@ -9,11 +9,10 @@ tools {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
             }
         }
-         stage('terraform') {
-            steps {
-                sh './terraformw apply -auto-approve -no-color'
-            }
-        }
+    stage('terraform') {
+      steps {
+        sh './terraformw apply -auto-approve -no-color'
+      }
     }
         stage ('Terraform version') { 
             steps {
@@ -55,3 +54,4 @@ tools {
             }
        }
     }
+}
