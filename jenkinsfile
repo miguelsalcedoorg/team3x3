@@ -1,53 +1,53 @@
-pipeline {
-agent any
-tools {
-  terraform 'Terraform'
-}
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
-            }
-        }
+// pipeline {
+// agent any
+// tools {
+//   terraform 'Terraform'
+// }
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
+//             }
+//         }
 
-        stage ('Terraform version') { 
-            steps {
-                sh '''
-                     terraform --version
-                     ''' 
-                 }
-             }
+//         stage ('Terraform version') { 
+//             steps {
+//                 sh '''
+//                      terraform --version
+//                      ''' 
+//                  }
+//              }
     
-        stage ('Terraform init') { 
-            steps {
-                 sh '''
-                    cd terraform-test/
-                    terraform init
-                    ''' 
-                 }
-             }
+//         stage ('Terraform init') { 
+//             steps {
+//                  sh '''
+//                     cd terraform-test/
+//                     terraform init
+//                     ''' 
+//                  }
+//              }
    
-        stage ('Terraform plan') { 
-            steps {
-                 sh '''
-                    cd terraform-test/
-                    terraform plan -out=tfplan.out
-                    terraform show -json tfplan.out
-                    ''' 
-                }
-            }
-        stage ('Terraform apply') { 
-            steps {
-                sh '''
-                    cd terraform-test/
-                    terraform apply --auto-approve
-                    ''' 
-                    }
-        post { 
-            always { 
-                cleanWs()
-                }
-            }
-       }
-    }
-}
+//         stage ('Terraform plan') { 
+//             steps {
+//                  sh '''
+//                     cd terraform-test/
+//                     terraform plan -out=tfplan.out
+//                     terraform show -json tfplan.out
+//                     ''' 
+//                 }
+//             }
+//         stage ('Terraform apply') { 
+//             steps {
+//                 sh '''
+//                     cd terraform-test/
+//                     terraform apply --auto-approve
+//                     ''' 
+//                     }
+//         post { 
+//             always { 
+//                 cleanWs()
+//                 }
+//             }
+//        }
+//     }
+// }
