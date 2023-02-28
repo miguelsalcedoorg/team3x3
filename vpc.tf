@@ -5,8 +5,10 @@ variable "region" {
 
 
 provider "aws" {
+  shared_config_files      = ["/Users/19526/.aws/config"]
+  shared_credentials_files = ["/Users/19526/.aws/credentials"]
+  profile                  = "ThompTyler"
   region  = "us-east-1"
-  # profile = "VETTEC"
 }
 
 
