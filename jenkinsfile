@@ -9,6 +9,16 @@ tools {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
             }
         }
+                stage('AWS Commands'){
+            steps {
+                script {
+                    // sign into AWS
+                    withAWS(credentials: 'thomptyler', region: 'us-east-1'){ 
+                        sh 'aws sts get-caller-identity'
+                    }
+                }
+            }
+        }
         stage ('Terraform version') { 
             steps {
                 sh '''
