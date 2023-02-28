@@ -7,8 +7,6 @@ variable "region" {
 provider "aws" {
   profile  = "ThompTyler"
   region  = "us-east-1"
-  access_key = "AKIATXZJXCKWVIGVJR7V"
-  secret_key = "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"
 }
 
 # provider "aws" {}
