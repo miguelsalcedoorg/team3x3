@@ -5,12 +5,17 @@ variable "region" {
 
 
 provider "aws" {
-  shared_config_files      = ["C:/Users/19526/.aws/config"]
-  shared_credentials_files = ["C:/Users/19526/.aws/credentials"]
-  profile                  = "ThompTyler"
+  profile  = "ThompTyler"
   region  = "us-east-1"
+  access_key = "AKIATXZJXCKWVIGVJR7V"
+  secret_key = "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"
 }
 
+# provider "aws" {}
+# $ export AWS_ACCESS_KEY_ID="anaccesskey"
+# $ export AWS_SECRET_ACCESS_KEY="asecretkey"
+# $ export AWS_REGION="us-east-2"
+# $ terraform plan
 
 data "aws_availability_zones" "available" {}
 
