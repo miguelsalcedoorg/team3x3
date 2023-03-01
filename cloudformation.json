@@ -3,7 +3,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 Parameters:
 
   LatestAmiId:
-    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Type: AWS: :SSM: :Parameter: :Value<AWS: :EC2: :Image: :Id>
     Default: /aws/service/canonical/ubuntu/server-minimal/20.04/stable/20210223/amd64/hvm/ebs-gp2/ami-id
 
   InstanceName: 
@@ -16,7 +16,7 @@ Parameters:
     Type: String
 
 Metadata: 
-  AWS::CloudFormation::Interface: 
+  AWS: :CloudFormation: :Interface: 
     ParameterGroups: 
       - 
         Label: 
@@ -30,12 +30,12 @@ Metadata:
 Resources:
 
   MyKeyPair:
-    Type: AWS::EC2::KeyPair
+    Type: AWS: :EC2: :KeyPair
     Properties:
       KeyName: Team3
 
   Ec2Instance: 
-    Type: AWS::EC2::Instance
+    Type: AWS: :EC2: :Instance
     Properties: 
       ImageId: /aws/service/canonical/ubuntu/server-minimal/20.04/stable/20210223/amd64/hvm/ebs-gp2/ami-id
       InstanceType: t3.medium
@@ -45,7 +45,7 @@ Resources:
       - Key: Name
         Value: Team3
       UserData:
-        Fn::Base64: 
+        Fn: :Base64: 
           !Sub |
               #!/bin/bash
               apt update

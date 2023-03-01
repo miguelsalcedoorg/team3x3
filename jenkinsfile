@@ -1,6 +1,12 @@
 pipeline {
 agent any
 
+        // stage('AWS Commands'){
+        //     steps {
+        //             // sign into AWS   
+        //         sh 'aws sts get-caller-identity'    
+        //     }
+        // }
 tools {
   terraform 'Terraform'
 }
@@ -23,12 +29,6 @@ tools {
                  sh '''
                     terraform init
                     ''' 
-            }
-        }
-        stage('AWS Commands'){
-            steps {
-                    // sign into AWS   
-                sh 'aws sts get-caller-identity'    
             }
         }
         stage ('Terraform apply') { 
