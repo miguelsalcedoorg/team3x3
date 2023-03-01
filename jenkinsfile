@@ -15,22 +15,28 @@ tools {
                 sh '''
                      terraform --version
                      ''' 
-                 }
-             }
+            }
+        }
     
         stage ('Terraform init') { 
             steps {
                  sh '''
                     terraform init
                     ''' 
-                 }
-             }
+            }
+        }
+        stage('AWS Commands'){
+            steps {
+                    // sign into AWS   
+                sh 'aws sts get-caller-identity'    
+            }
+        }
         stage ('Terraform apply') { 
             steps {
                 sh '''
                     terraform apply --auto-approve
                     ''' 
-                    }
+            }
         post { 
             always { 
                 cleanWs()
