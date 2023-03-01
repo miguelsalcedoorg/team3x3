@@ -4,7 +4,7 @@ variable "region" {
 }
 
 provider "aws" {
-  profile = "ThompTyler"
+  profile = "dyoung"
   region  = "us-east-1"
 }
 
