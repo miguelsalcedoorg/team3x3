@@ -1,17 +1,17 @@
 pipeline {
 agent any
 
-  stages {
-        stage('Login, Build and Push'){
-            steps {
-                script{
-                    //sign into docker, build image, and push image to dockerhub
-                    withDockerRegistry(credentialsId: 'Docker') {
-                        docker.build('team3/flaskapp').push('latest')
-                    }
-                }
-            }
-        }
+//   stages {
+//         stage('Login, Build and Push'){
+//             steps {
+//                 script{
+//                     //sign into docker, build image, and push image to dockerhub
+//                     withDockerRegistry(credentialsId: 'Docker') {
+//                         docker.build('team3/flaskapp').push('latest')
+//                     }
+//                 }
+//             }
+//         }
         stage('AWS Commands'){
             steps {
                 
