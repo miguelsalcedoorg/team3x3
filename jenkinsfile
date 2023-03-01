@@ -42,7 +42,7 @@ agent any
                     }
                 }
             }
-        }
+
     
 tools {
   terraform 'Terraform'
