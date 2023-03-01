@@ -45,42 +45,42 @@ agent any
             }
 }
 
-tools {
-  terraform 'Terraform'
-}
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
-            }
-        }
-        stage ('Terraform version') { 
-            steps {
-                sh '''
-                     terraform --version
-                     ''' 
-            }
-        }
+// tools {
+//   terraform 'Terraform'
+// }
+//     stages {
+//         stage('Checkout') {
+//             steps {
+//                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/miguelsalcedoorg/team3x3.git']]])
+//             }
+//         }
+//         stage ('Terraform version') { 
+//             steps {
+//                 sh '''
+//                      terraform --version
+//                      ''' 
+//             }
+//         }
     
-        stage ('Terraform init') { 
-            steps {
-                 sh '''
-                    terraform init
-                    ''' 
-            }
-        }
-        stage ('Terraform apply') { 
-            steps {
-                sh '''
-                    terraform apply --auto-approve
-                    ''' 
-            }
-        post { 
-            always { 
-                cleanWs()
-                }
-            }
-       }
-    }
-}
+//         stage ('Terraform init') { 
+//             steps {
+//                  sh '''
+//                     terraform init
+//                     ''' 
+//             }
+//         }
+//         stage ('Terraform apply') { 
+//             steps {
+//                 sh '''
+//                     terraform apply --auto-approve
+//                     ''' 
+//             }
+//         post { 
+//             always { 
+//                 cleanWs()
+//                 }
+//             }
+//        }
+//     }
+// }
 
