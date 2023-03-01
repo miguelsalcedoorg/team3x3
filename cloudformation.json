@@ -32,18 +32,18 @@ Resources:
   MyKeyPair:
     Type: AWS::EC2::KeyPair
     Properties:
-      KeyName: !Ref "Team3"
+      KeyName: !Ref KeyName
 
   Ec2Instance: 
     Type: AWS::EC2::Instance
     Properties: 
-      ImageId: !Ref "ami-06351f6e4c4e5bc50"
+      ImageId: !Ref LatestAmiId
       InstanceType: t3.medium
-      KeyName: !Ref "Team3"
-      SubnetId: !Ref "subnet-0ef342993e1abaa3e"
+      KeyName: !Ref MyKeyPair
+      SubnetId: !Ref SubnetId
       Tags:
       - Key: Name
-        Value: !Ref "Team3"
+        Value: !Ref InstanceName
       UserData:
         Fn::Base64: 
           !Sub |
