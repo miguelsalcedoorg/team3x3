@@ -3,17 +3,10 @@ variable "region" {
   description = "AWS region"
 }
 
-
 provider "aws" {
-  profile  = "thomptyler"
+  profile = "ThompTyler"
   region  = "us-east-1"
 }
-
-# provider "aws" {}
-# $ export AWS_ACCESS_KEY_ID="anaccesskey"
-# $ export AWS_SECRET_ACCESS_KEY="asecretkey"
-# $ export AWS_REGION="us-east-2"
-# $ terraform plan
 
 data "aws_availability_zones" "available" {}
 
