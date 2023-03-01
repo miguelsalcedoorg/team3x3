@@ -41,7 +41,9 @@ stages{
                         }
                     }
 
-
+            }
+            }
+}
 
 tools {
   terraform 'Terraform'
