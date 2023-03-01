@@ -25,12 +25,12 @@ tools {
                     ''' 
             }
         }
-        stage('AWS Commands'){
-            steps {
-                    // sign into AWS   
-                sh 'aws sts get-caller-identity'    
-            }
-        }
+        // stage('AWS Commands'){
+        //     steps {
+        //             // sign into AWS   
+        //         sh 'aws sts get-caller-identity'    
+        //     }
+        // }
         stage ('Terraform apply') { 
             steps {
                 sh '''
