@@ -32,18 +32,18 @@ Resources:
   MyKeyPair:
     Type: AWS::EC2::KeyPair
     Properties:
-      KeyName: !Ref KeyName
+      KeyName: Team3
 
   Ec2Instance: 
     Type: AWS::EC2::Instance
     Properties: 
-      ImageId: !Ref LatestAmiId
+      ImageId: /aws/service/canonical/ubuntu/server-minimal/20.04/stable/20210223/amd64/hvm/ebs-gp2/ami-id
       InstanceType: t3.medium
-      KeyName: !Ref MyKeyPair
-      SubnetId: !Ref SubnetId
+      KeyName: Team3
+      SubnetId: subnet-0ef342993e1abaa3e
       Tags:
       - Key: Name
-        Value: !Ref InstanceName
+        Value: Team3
       UserData:
         Fn::Base64: 
           !Sub |
