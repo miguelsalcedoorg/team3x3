@@ -1,59 +1,73 @@
-AWSTemplateFormatVersion: "2010-09-09"
-
-Parameters:
-
-  LatestAmiId:
-    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
-    Default: /aws/service/canonical/ubuntu/server-minimal/20.04/stable/20210223/amd64/hvm/ebs-gp2/ami-id
-
-  InstanceName: 
-    Type: String
-
-  KeyName: 
-    Type: String
-
-  SubnetId:
-    Type: String
-
-Metadata: 
-  AWS::CloudFormation::Interface: 
-    ParameterGroups: 
-      - 
-        Label: 
-          default: "Instance Configuration"
-        Parameters:
-          - InstanceName
-          - KeyName
-          - SubnetId
-          - LatestAmiId
-
-Resources:
-
-  MyKeyPair:
-    Type: AWS::EC2::KeyPair
-    Properties:
-      KeyName: !Ref KeyName
-
-  Ec2Instance: 
-    Type: AWS::EC2::Instance
-    Properties: 
-      ImageId: !Ref LatestAmiId
-      InstanceType: t3.medium
-      KeyName: !Ref MyKeyPair
-      SubnetId: !Ref SubnetId
-      Tags:
-      - Key: Name
-        Value: !Ref InstanceName
-      UserData:
-        Fn::Base64: 
-          !Sub |
-              #!/bin/bash
-              apt update
-              apt install docker.io -y
-              usermod -aG docker ubuntu
-              apt install zip -y
-              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-              unzip awscliv2.zip
-              sudo ./aws/install
-              snap install kubectl --classic
-
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+      "LatestAmiId": {
+          "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+          "Default": "/aws/service/canonical/ubuntu/server-minimal/20.04/stable/20210223/amd64/hvm/ebs-gp2/ami-id"
+      },
+      "InstanceName": {
+          "Type": "String"
+      },
+      "KeyName": {
+          "Type": "String"
+      },
+      "SubnetId": {
+          "Type": "String"
+      }
+  },
+  "Metadata": {
+      "AWS::CloudFormation::Interface": {
+          "ParameterGroups": [
+              {
+                  "Label": {
+                      "default": "Instance Configuration"
+                  },
+                  "Parameters": [
+                      "InstanceName",
+                      "KeyName",
+                      "SubnetId",
+                      "LatestAmiId"
+                  ]
+              }
+          ]
+      }
+  },
+  "Resources": {
+      "MyKeyPair": {
+          "Type": "AWS::EC2::KeyPair",
+          "Properties": {
+              "KeyName": {
+                  "Ref": "KeyName"
+              }
+          }
+      },
+      "Ec2Instance": {
+          "Type": "AWS::EC2::Instance",
+          "Properties": {
+              "ImageId": {
+                  "Ref": "LatestAmiId"
+              },
+              "InstanceType": "t3.medium",
+              "KeyName": {
+                  "Ref": "MyKeyPair"
+              },
+              "SubnetId": {
+                  "Ref": "SubnetId"
+              },
+              "Tags": [
+                  {
+                      "Key": "Name",
+                      "Value": {
+                          "Ref": "InstanceName"
+                      }
+                  }
+              ],
+              "UserData": {
+                  "Fn::Base64": {
+                      "Fn::Sub": "#!/bin/bash\napt update\napt install docker.io -y\nusermod -aG docker ubuntu\napt install zip -y\ncurl \"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip\" -o \"awscliv2.zip\"\nunzip awscliv2.zip\nsudo ./aws/install\nsnap install kubectl --classic\n"
+                  }
+              }
+          }
+      }
+  }
+}
