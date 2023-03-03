@@ -4,7 +4,7 @@ variable "region" {
 }
 
 provider "aws" {
-  profile = "dyoung"
+  profile = "ThompTyler"
   region  = "us-east-1"
 }
 
@@ -35,6 +35,7 @@ module "vpc" {
   enable_nat_gateway   = true
   single_nat_gateway   = true
   enable_dns_hostnames = true
+  map_public_ip_on_launch = true 
 
 
   tags = {
