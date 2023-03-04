@@ -63,7 +63,7 @@ resource "aws_eks_cluster" "eks-cluster" {
 
 
 resource "aws_eks_node_group" "node-ec2" {
-  cluster_name    = "Team3-eks-cluster"
+  cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "t3_medium-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
   subnet_ids      = [aws_subnet.private[1].id]
