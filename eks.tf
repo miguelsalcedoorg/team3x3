@@ -50,6 +50,7 @@ resource "aws_eks_cluster" "eks-cluster" {
   name     = "Team3-eks-cluster"
   role_arn = aws_iam_role.EKSClusterRole.arn
   version  = "1.24"
+  
   vpc_config {
     subnet_ids         = [aws_subnet.private[2].id, aws_subnet.private[3].id]
     security_group_ids = [aws_security_group.SG_LB.id]
@@ -77,7 +78,7 @@ resource "aws_eks_node_group" "node-ec2" {
 
 
 #   ami_type       = "AL2_x86_64"
-  instance_types = ["t3.micro"]
+  instance_types = ["t3.medium"]
   capacity_type  = "SPOT"
   disk_size      = 20
 
@@ -86,5 +87,6 @@ resource "aws_eks_node_group" "node-ec2" {
     aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
+
   ]
 }

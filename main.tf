@@ -105,21 +105,6 @@ resource "aws_launch_configuration" "as_conf" {
   }
 }
 
-resource "aws_autoscaling_group" "asg-aws" {
-  name                 = "Team-Three-autoscalegroup"
-  launch_configuration = aws_launch_configuration.as_conf.name
-  min_size             = 2
-  max_size             = 3
-  vpc_zone_identifier = [aws_subnet.public[0].id, aws_subnet.public[1].id]
-    tag {
-    key                 = "Name"
-    value               = "Team Three"
-    propagate_at_launch = true
-  }
-  lifecycle {
-    create_before_destroy = true
-  }
-}
 
 resource "aws_default_network_acl" "default" {
   default_network_acl_id = aws_vpc.myVpc.default_network_acl_id
