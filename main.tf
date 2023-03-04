@@ -27,7 +27,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
-  count = 2
+  count = 4
   vpc_id      = "${aws_vpc.myVpc.id}"
   availability_zone = data.aws_availability_zones.availability_zones.names[count.index]
   cidr_block = cidrsubnet(aws_vpc.myVpc.cidr_block, 8, count.index + 3)

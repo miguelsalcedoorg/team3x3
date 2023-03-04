@@ -47,11 +47,11 @@ resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy" {
 
 
 resource "aws_eks_cluster" "eks-cluster" {
-  name     = "eks-cluster"
+  name     = "Team3-eks-cluster"
   role_arn = aws_iam_role.EKSClusterRole.arn
   version  = "1.24"
   vpc_config {
-    subnet_ids         = [aws_subnet.private[0].id]
+    subnet_ids         = [aws_subnet.private[2].id, aws_subnet.private[3].id]
     security_group_ids = [aws_security_group.SG_LB.id]
   }
   depends_on = [
@@ -63,7 +63,7 @@ resource "aws_eks_cluster" "eks-cluster" {
 
 
 resource "aws_eks_node_group" "node-ec2" {
-  cluster_name    = "Team3_Cluster"
+  cluster_name    = "Team3-eks-cluster"
   node_group_name = "t3_medium-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
   subnet_ids      = [aws_subnet.private[1].id]
