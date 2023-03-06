@@ -93,18 +93,6 @@ data "aws_ami" "aws-ami" {
   most_recent = true
 }
 
-resource "aws_launch_configuration" "as_conf" {
-  name_prefix   = "Team-Three-Launch-Config"
-  image_id      = data.aws_ami.linux2.id
-  instance_type = var.instance_type
-  security_groups = ["${aws_security_group.SG_LB.id}"]
-  user_data = file("userdata.sh")
-  
-    lifecycle {
-    create_before_destroy = true
-  }
-}
-
 
 resource "aws_default_network_acl" "default" {
   default_network_acl_id = aws_vpc.myVpc.default_network_acl_id
@@ -125,18 +113,5 @@ resource "aws_default_network_acl" "default" {
     cidr_block = "0.0.0.0/0"
     from_port  = 0
     to_port    = 0
-  }
-}
-
-
-resource "aws_alb" "loadbalancer" {
-  name               = "Team-Three-aws-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.SG_LB.id]
-  subnets            = [for subnet in aws_subnet.public : subnet.id]
-  tags = {
-    Environment = "production"
-    name = "Team Three EC2"
   }
 }

@@ -52,8 +52,8 @@ resource "aws_eks_cluster" "eks-cluster" {
   version  = "1.24"
   
   vpc_config {
-    subnet_ids         = [aws_subnet.private[2].id, aws_subnet.private[3].id]
-    security_group_ids = [aws_security_group.SG_LB.id]
+    subnet_ids         = aws_subnet.private[*].id
+    # security_group_ids = [aws_security_group.SG_LB.id]
   }
   depends_on = [
     aws_iam_role_policy_attachment.AmazonEKSClusterPolicy
@@ -67,7 +67,7 @@ resource "aws_eks_node_group" "node-ec2" {
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "t3_medium-node_group"
   node_role_arn   = aws_iam_role.NodeGroupRole.arn
-  subnet_ids      = [aws_subnet.private[1].id]
+  subnet_ids      = aws_subnet.private[*].id
 
 
   scaling_config {
@@ -77,7 +77,6 @@ resource "aws_eks_node_group" "node-ec2" {
   }
 
 
-#   ami_type       = "AL2_x86_64"
   instance_types = ["t3.medium"]
   capacity_type  = "SPOT"
   disk_size      = 20
