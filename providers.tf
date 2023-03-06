@@ -9,7 +9,7 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
-  profile = "thomptyler"
+  profile = "ThompTyler"
   default_tags {
     tags = var.tags
   }

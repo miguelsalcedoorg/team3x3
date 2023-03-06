@@ -27,7 +27,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
-  count = 2
+  count = 4
   vpc_id      = "${aws_vpc.myVpc.id}"
   availability_zone = data.aws_availability_zones.availability_zones.names[count.index]
   cidr_block = cidrsubnet(aws_vpc.myVpc.cidr_block, 8, count.index + 3)
@@ -105,21 +105,6 @@ resource "aws_launch_configuration" "as_conf" {
   }
 }
 
-resource "aws_autoscaling_group" "asg-aws" {
-  name                 = "Team-Three-autoscalegroup"
-  launch_configuration = aws_launch_configuration.as_conf.name
-  min_size             = 2
-  max_size             = 3
-  vpc_zone_identifier = [aws_subnet.public[0].id, aws_subnet.public[1].id]
-    tag {
-    key                 = "Name"
-    value               = "Team Three"
-    propagate_at_launch = true
-  }
-  lifecycle {
-    create_before_destroy = true
-  }
-}
 
 resource "aws_default_network_acl" "default" {
   default_network_acl_id = aws_vpc.myVpc.default_network_acl_id
